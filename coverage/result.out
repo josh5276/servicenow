@@ -1,4 +1,11 @@
 mode: set
+github.com/josh5276/servicenow/task.go:14.75,20.2 3 0
+github.com/josh5276/servicenow/task.go:24.69,32.2 4 0
+github.com/josh5276/servicenow/time.go:14.49,17.29 2 1
+github.com/josh5276/servicenow/time.go:21.2,23.12 3 1
+github.com/josh5276/servicenow/time.go:17.29,19.3 1 0
+github.com/josh5276/servicenow/time.go:26.48,28.2 1 0
+github.com/josh5276/servicenow/user.go:6.78,10.2 3 0
 github.com/josh5276/servicenow/change.go:10.78,16.2 3 0
 github.com/josh5276/servicenow/cmdb.go:7.68,13.2 3 0
 github.com/josh5276/servicenow/service.go:21.29,22.20 1 1
@@ -27,10 +34,3 @@ github.com/josh5276/servicenow/service.go:107.89,109.2 1 0
 github.com/josh5276/servicenow/service.go:113.85,115.2 1 0
 github.com/josh5276/servicenow/service.go:119.93,125.2 3 0
 github.com/josh5276/servicenow/service.go:129.66,131.2 1 0
-github.com/josh5276/servicenow/task.go:14.75,20.2 3 0
-github.com/josh5276/servicenow/task.go:24.69,32.2 4 0
-github.com/josh5276/servicenow/time.go:14.49,17.29 2 1
-github.com/josh5276/servicenow/time.go:21.2,23.12 3 1
-github.com/josh5276/servicenow/time.go:17.29,19.3 1 0
-github.com/josh5276/servicenow/time.go:26.48,28.2 1 0
-github.com/josh5276/servicenow/user.go:6.78,10.2 3 0
