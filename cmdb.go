@@ -2,8 +2,12 @@ package servicenow
 
 import "net/url"
 
+// TableCMDB defines the name of the table withing the JSONv2 web service to interface with
+// SNOW CMDB
 const TableCMDB = "cmdb_ci"
 
+// GetCMDBItems method will take a url.Value type argument and call the GetRecordsFor method with
+// the cmdb_ci table and query as the arguments, then format the response into a list of CMDBItem types
 func (c Client) GetCMDBItems(query url.Values) ([]CMDBItem, error) {
 	var res struct {
 		Records []CMDBItem
@@ -12,6 +16,8 @@ func (c Client) GetCMDBItems(query url.Values) ([]CMDBItem, error) {
 	return res.Records, err
 }
 
+// CMDBItem is a struct type to define the formatted response received from the JSONv2
+// ServiceNow Web Service
 type CMDBItem struct {
 	Status              string `json:"__status"`
 	Asset               string `json:"asset"`

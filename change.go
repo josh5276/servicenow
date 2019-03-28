@@ -5,8 +5,12 @@ import (
 	"net/url"
 )
 
+// TableChangeRequests defines the name of the table withing the JSONv2 web service to interface with
+// SNOW CHG items
 const TableChangeRequests = "change_request"
 
+// GetChangeRequests method will take a url.Value type argument and call the GetRecordsFor method with
+// the change_request table and query as the arguments, then format the response into the ChangeRequest type
 func (c Client) GetChangeRequests(query url.Values) ([]ChangeRequest, error) {
 	var res struct {
 		Records []ChangeRequest
@@ -15,6 +19,8 @@ func (c Client) GetChangeRequests(query url.Values) ([]ChangeRequest, error) {
 	return res.Records, err
 }
 
+// ChangeRequest is a struct type to define the formatted response received from the JSONv2
+// ServiceNow Web Service
 type ChangeRequest struct {
 	Status                   string      `json:"__status"`
 	Active                   bool        `json:"active,string"`

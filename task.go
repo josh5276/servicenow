@@ -19,6 +19,18 @@ func (c Client) GetTasksRequests(query url.Values) ([]TaskRequest, error) {
 	return res.Records, err
 }
 
+// CreateTask method will take a url.Value type argument and call the GetRecordsFor method with
+// the task table and query as the arguments, then format the response into the TaskRequest type
+func (c Client) CreateTask(query url.Values) ([]TaskRequest, error) {
+	var res struct {
+		Records []TaskRequest
+	}
+
+	var test interface{}
+	err := c.Insert(TableTasks, query, &test)
+	return res.Records, err
+}
+
 // TaskRequest is a struct type to define the formatted response received from the JSONv2
 // ServiceNow Web Service
 type TaskRequest struct {

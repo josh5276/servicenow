@@ -7,13 +7,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-const tJson = `{"time": "2006-01-02 15:04:05"}`
+const tJSON = `{"time": "2006-01-02 15:04:05"}`
 
 func TestTime(t *testing.T) {
 	asrt := assert.New(t)
 
 	var tm struct{ Time SNTime }
-	asrt.NoError(json.Unmarshal([]byte(tJson), &tm))
+	asrt.NoError(json.Unmarshal([]byte(tJSON), &tm))
 
 	t.Log(tm)
 	asrt.Equal(2006, tm.Time.Year(), "Year should match")

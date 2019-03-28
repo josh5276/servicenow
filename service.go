@@ -36,7 +36,7 @@ func sys(param string) string {
 
 // PerformFor creates and executes an authenticated HTTP request to an instance,
 // for the given table, action and optional id, with the passed options, and
-// unmarhals the JSON into the passed output interface pointer, returning an
+// unmarshal's the JSON into the passed output interface pointer, returning an
 // error.
 func (c *Client) PerformFor(table, action, id string, opts url.Values, body interface{}, out interface{}) error {
 	inst := c.Instance
@@ -66,8 +66,7 @@ func (c *Client) PerformFor(table, action, id string, opts url.Values, body inte
 
 	if body != nil {
 		meth = http.MethodPost
-		err := json.NewEncoder(buf).Encode(body)
-		if err != nil {
+		if err := json.NewEncoder(buf).Encode(body); err != nil {
 			return err
 		}
 	}
@@ -104,13 +103,13 @@ func (c *Client) PerformFor(table, action, id string, opts url.Values, body inte
 }
 
 // GetFor performs a servicenow get to the specified table, with options, and
-// unmarhals JSON into the output parameter.
+// unmarshal's JSON into the output parameter.
 func (c Client) GetFor(table string, id string, opts url.Values, out interface{}) error {
 	return c.PerformFor(table, "get", id, opts, nil, out)
 }
 
 // GetRecordsFor performs a servicenow getRecords to the specified table, with
-// options, and unmarhals JSON into the output parameter.
+// options, and unmarshal's JSON into the output parameter.
 func (c Client) GetRecordsFor(table string, opts url.Values, out interface{}) error {
 	return c.PerformFor(table, "getRecords", "", opts, nil, out)
 }
