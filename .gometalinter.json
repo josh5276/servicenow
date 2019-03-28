@@ -1,0 +1,13 @@
+{
+	"Enable": [
+		"deadcode",
+		"golint",
+		"gosimple",
+		"goconst"
+	],
+	"Disable": [
+		"gocyclo"
+	],
+	"Debug": false,
+	"Vendor": false
+}

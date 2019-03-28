@@ -1,0 +1,23 @@
+# IntelliJ Files
+.idea
+*.iml
+
+# Secret Files
+coverage/*
+.auth
+.token
+.pass
+local
+
+# binary files
+/bin/*
+
+# Generated HTML Files for docserver
+docs/html/*
+
+playground/
+
+# Random OS files
+.qicon
+.qnicon
+.DS_Store
