@@ -40,7 +40,7 @@ release:
 	goreleaser --rm-dist
 
 # Test related actions
-# This action should run all tests related to the nethealthAPI, generate readable test coverage results,
+# This action should run all tests related to the servicenow, generate readable test coverage results,
 # then update gh-pages with the latest information.
 test: test_clean_dir test_run update_pages
 
