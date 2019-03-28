@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/josh5276/servicenow/change.go (0.0%)</option>
+				
+				<option value="file1">github.com/josh5276/servicenow/cmdb.go (0.0%)</option>
+				
+				<option value="file2">github.com/josh5276/servicenow/service.go (59.5%)</option>
+				
+				<option value="file3">github.com/josh5276/servicenow/task.go (0.0%)</option>
+				
+				<option value="file4">github.com/josh5276/servicenow/time.go (71.4%)</option>
+				
+				<option value="file5">github.com/josh5276/servicenow/user.go (0.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package servicenow
+
+import (
+        "encoding/json"
+        "net/url"
+)
+
+const TableChangeRequests = "change_request"
+
+func (c Client) GetChangeRequests(query url.Values) ([]ChangeRequest, error) <span class="cov0" title="0">{
+        var res struct {
+                Records []ChangeRequest
+        }
+        err := c.GetRecordsFor(TableChangeRequests, query, &amp;res)
+        return res.Records, err
+}</span>
+
+type ChangeRequest struct {
+        Status                   string      `json:"__status"`
+        Active                   bool        `json:"active,string"`
+        ActivityDue              string      `json:"activity_due"`
+        AdditionalAssigneeList   string      `json:"additional_assignee_list"`
+        Approval                 string      `json:"approval"`
+        ApprovalHistory          string      `json:"approval_history"`
+        ApprovalSet              string      `json:"approval_set"`
+        AssignedTo               string      `json:"assigned_to"`
+        AssignmentGroup          string      `json:"assignment_group"`
+        BackoutPlan              string      `json:"backout_plan"`
+        BusinessDuration         string      `json:"business_duration"`
+        BusinessService          string      `json:"business_service"`
+        CabDate                  SNTime      `json:"cab_date"`
+        CabDelegate              string      `json:"cab_delegate"`
+        CabRecommendation        string      `json:"cab_recommendation"`
+        CabRequired              bool        `json:"cab_required,string"`
+        CalendarDuration         string      `json:"calendar_duration"`
+        Category                 string      `json:"category"`
+        ChangePlan               string      `json:"change_plan"`
+        CloseCode                string      `json:"close_code"`
+        CloseNotes               string      `json:"close_notes"`
+        ClosedAt                 SNTime      `json:"closed_at"`
+        ClosedBy                 string      `json:"closed_by"`
+        CmdbCi                   string      `json:"cmdb_ci"`
+        Comments                 string      `json:"comments"`
+        CommentsAndWorkNotes     string      `json:"comments_and_work_notes"`
+        Company                  string      `json:"company"`
+        ConflictLastRun          string      `json:"conflict_last_run"`
+        ConflictStatus           string      `json:"conflict_status"`
+        ContactType              string      `json:"contact_type"`
+        CorrelationDisplay       string      `json:"correlation_display"`
+        CorrelationID            string      `json:"correlation_id"`
+        DeliveryPlan             string      `json:"delivery_plan"`
+        DeliveryTask             string      `json:"delivery_task"`
+        Description              string      `json:"description"`
+        DueDate                  SNTime      `json:"due_date"`
+        EndDate                  SNTime      `json:"end_date"`
+        Escalation               json.Number `json:"escalation"`
+        ExpectedStart            SNTime      `json:"expected_start"`
+        FollowUp                 string      `json:"follow_up"`
+        GroupList                string      `json:"group_list"`
+        Impact                   json.Number `json:"impact"`
+        ImplementationPlan       string      `json:"implementation_plan"`
+        Justification            string      `json:"justification"`
+        Knowledge                bool        `json:"knowledge,string"`
+        Location                 string      `json:"location"`
+        MadeSLA                  bool        `json:"made_sla,string"`
+        Number                   string      `json:"number"`
+        OnHold                   bool        `json:"on_hold,string"`
+        OnHoldReason             string      `json:"on_hold_reason"`
+        OpenedAt                 SNTime      `json:"opened_at"`
+        OpenedBy                 string      `json:"opened_by"`
+        Order                    string      `json:"order"`
+        OutsideMaintSchedule     bool        `json:"outside_maintenance_schedule,string"`
+        Parent                   string      `json:"parent"`
+        Phase                    string      `json:"phase"`
+        PhaseState               string      `json:"phase_state"`
+        Priority                 json.Number `json:"priority"`
+        ProductionSystem         bool        `json:"production_system,string"`
+        Reason                   string      `json:"reason"`
+        ReassignmentCount        json.Number `json:"reassignment_count"`
+        RequestedBy              string      `json:"requested_by"`
+        RequestedByDate          SNTime      `json:"requested_by_date"`
+        ReviewComments           string      `json:"review_comments"`
+        ReviewDate               SNTime      `json:"review_date"`
+        ReviewStatus             string      `json:"review_status"`
+        Risk                     json.Number `json:"risk"`
+        RiskImpactAnalysis       string      `json:"risk_impact_analysis"`
+        Scope                    json.Number `json:"scope"`
+        ShortDescription         string      `json:"short_description"`
+        SLADue                   string      `json:"sla_due"`
+        StartDate                SNTime      `json:"start_date"`
+        State                    string      `json:"state"`
+        StdChangeProducerVersion string      `json:"std_change_producer_version"`
+        SysClassName             string      `json:"sys_class_name"`
+        SysCreatedBy             string      `json:"sys_created_by"`
+        SysCreatedOn             SNTime      `json:"sys_created_on"`
+        SysDomain                string      `json:"sys_domain"`
+        SysDomainPath            string      `json:"sys_domain_path"`
+        SysID                    string      `json:"sys_id"`
+        SysModCount              json.Number `json:"sys_mod_count"`
+        SysTags                  string      `json:"sys_tags"`
+        SysUpdatedBy             string      `json:"sys_updated_by"`
+        SysUpdatedOn             SNTime      `json:"sys_updated_on"`
+        TestPlan                 string      `json:"test_plan"`
+        TimeWorked               string      `json:"time_worked"`
+        Type                     string      `json:"type"`
+        UponApproval             string      `json:"upon_approval"`
+        UponReject               string      `json:"upon_reject"`
+        Urgency                  string      `json:"urgency"`
+        UserInput                string      `json:"user_input"`
+        WatchList                string      `json:"watch_list"`
+        WorkEnd                  string      `json:"work_end"`
+        WorkNotes                string      `json:"work_notes"`
+        WorkNotesList            string      `json:"work_notes_list"`
+        WorkStart                string      `json:"work_start"`
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package servicenow
+
+import "net/url"
+
+const TableCMDB = "cmdb_ci"
+
+func (c Client) GetCMDBItems(query url.Values) ([]CMDBItem, error) <span class="cov0" title="0">{
+        var res struct {
+                Records []CMDBItem
+        }
+        err := c.GetRecordsFor(TableCMDB, query, &amp;res)
+        return res.Records, err
+}</span>
+
+type CMDBItem struct {
+        Status              string `json:"__status"`
+        Asset               string `json:"asset"`
+        AssetTag            string `json:"asset_tag"`
+        Assigned            string `json:"assigned"`
+        AssignedTo          string `json:"assigned_to"`
+        AssignmentGroup     string `json:"assignment_group"`
+        Attributes          string `json:"attributes"`
+        CanPrint            string `json:"can_print"`
+        Category            string `json:"category"`
+        ChangeControl       string `json:"change_control"`
+        CheckedIn           string `json:"checked_in"`
+        CheckedOut          string `json:"checked_out"`
+        Comments            string `json:"comments"`
+        Company             string `json:"company"`
+        CorrelationID       string `json:"correlation_id"`
+        Cost                string `json:"cost"`
+        CostCc              string `json:"cost_cc"`
+        CostCenter          string `json:"cost_center"`
+        DeliveryDate        string `json:"delivery_date"`
+        Department          string `json:"department"`
+        DiscoverySource     string `json:"discovery_source"`
+        DNSDomain           string `json:"dns_domain"`
+        Due                 string `json:"due"`
+        DueIn               string `json:"due_in"`
+        FaultCount          string `json:"fault_count"`
+        FirstDiscovered     string `json:"first_discovered"`
+        Fqdn                string `json:"fqdn"`
+        GlAccount           string `json:"gl_account"`
+        InstallDate         string `json:"install_date"`
+        InstallStatus       string `json:"install_status"`
+        InvoiceNumber       string `json:"invoice_number"`
+        IPAddress           string `json:"ip_address"`
+        Justification       string `json:"justification"`
+        LastDiscovered      string `json:"last_discovered"`
+        LeaseID             string `json:"lease_id"`
+        Location            string `json:"location"`
+        MacAddress          string `json:"mac_address"`
+        MaintenanceSchedule string `json:"maintenance_schedule"`
+        ManagedBy           string `json:"managed_by"`
+        Manufacturer        string `json:"manufacturer"`
+        ModelID             string `json:"model_id"`
+        ModelNumber         string `json:"model_number"`
+        Monitor             string `json:"monitor"`
+        Name                string `json:"name"`
+        OperationalStatus   string `json:"operational_status"`
+        OrderDate           string `json:"order_date"`
+        OwnedBy             string `json:"owned_by"`
+        PoNumber            string `json:"po_number"`
+        PurchaseDate        string `json:"purchase_date"`
+        Schedule            string `json:"schedule"`
+        SerialNumber        string `json:"serial_number"`
+        ShortDescription    string `json:"short_description"`
+        SkipSync            string `json:"skip_sync"`
+        StartDate           string `json:"start_date"`
+        Subcategory         string `json:"subcategory"`
+        SupportGroup        string `json:"support_group"`
+        SupportedBy         string `json:"supported_by"`
+        SysClassName        string `json:"sys_class_name"`
+        SysClassPath        string `json:"sys_class_path"`
+        SysCreatedBy        string `json:"sys_created_by"`
+        SysCreatedOn        string `json:"sys_created_on"`
+        SysDomain           string `json:"sys_domain"`
+        SysDomainPath       string `json:"sys_domain_path"`
+        SysID               string `json:"sys_id"`
+        SysModCount         string `json:"sys_mod_count"`
+        SysTags             string `json:"sys_tags"`
+        SysUpdatedBy        string `json:"sys_updated_by"`
+        SysUpdatedOn        string `json:"sys_updated_on"`
+        Unverified          string `json:"unverified"`
+        Vendor              string `json:"vendor"`
+        WarrantyExpiration  string `json:"warranty_expiration"`
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package servicenow
+
+import (
+        "bytes"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "regexp"
+)
+
+var httpRE = regexp.MustCompile("^https?://")
+
+// Err represents a possible error message that came back from the server
+type Err struct {
+        Err    string `json:"error"`
+        Reason string
+}
+
+func (e Err) Error() string <span class="cov8" title="1">{
+        if e.Reason == "" </span><span class="cov0" title="0">{
+                return e.Err
+        }</span>
+        <span class="cov8" title="1">return fmt.Sprintf("%s: %s", e.Err, e.Reason)</span>
+}
+
+// Client helps users interact with a ServiceNow instance.
+type Client struct {
+        Username, Password, Instance string
+}
+
+func sys(param string) string <span class="cov8" title="1">{
+        return fmt.Sprintf("sysparm_%s", param)
+}</span>
+
+// PerformFor creates and executes an authenticated HTTP request to an instance,
+// for the given table, action and optional id, with the passed options, and
+// unmarshal's the JSON into the passed output interface pointer, returning an
+// error.
+func (c *Client) PerformFor(table, action, id string, opts url.Values, body interface{}, out interface{}) error <span class="cov8" title="1">{
+        inst := c.Instance
+
+        if !httpRE.MatchString(inst) </span><span class="cov0" title="0">{
+                inst = "https://" + inst
+        }</span>
+
+        <span class="cov8" title="1">u := fmt.Sprintf("%s/%s.do", inst, table)
+
+        vals := url.Values{
+                "JSONv2":      {""},
+                sys("action"): {action},
+        }
+
+        if id != "" </span><span class="cov0" title="0">{
+                vals.Set(sys("sys_id"), id)
+                vals.Set("displayvalue", "true")
+        }</span>
+
+        <span class="cov8" title="1">if opts != nil </span><span class="cov0" title="0">{
+                vals.Set(sys("query"), opts.Encode())
+        }</span>
+
+        <span class="cov8" title="1">meth := http.MethodGet
+        buf := &amp;bytes.Buffer{}
+
+        if body != nil </span><span class="cov0" title="0">{
+                meth = http.MethodPost
+                if err := json.NewEncoder(buf).Encode(body); err != nil </span><span class="cov0" title="0">{
+                        return err
+                }</span>
+        }
+
+        <span class="cov8" title="1">req, err := http.NewRequest(meth, u+"?"+vals.Encode(), buf)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov8" title="1">if body != nil </span><span class="cov0" title="0">{
+                req.Header.Set("Content-Type", "application/json")
+        }</span>
+
+        <span class="cov8" title="1">req.SetBasicAuth(c.Username, c.Password)
+
+        res, err := http.DefaultClient.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov8" title="1">defer res.Body.Close()
+
+        buf.Reset()
+
+        // Store JSON so we can do a preliminary error check
+        var echeck Err
+
+        err = json.NewDecoder(io.TeeReader(res.Body, buf)).Decode(&amp;echeck)
+        if err == nil &amp;&amp; echeck.Err != "" </span><span class="cov8" title="1">{
+                return echeck
+        }</span>
+
+        <span class="cov8" title="1">return json.NewDecoder(buf).Decode(out)</span>
+}
+
+// GetFor performs a servicenow get to the specified table, with options, and
+// unmarshal's JSON into the output parameter.
+func (c Client) GetFor(table string, id string, opts url.Values, out interface{}) error <span class="cov0" title="0">{
+        return c.PerformFor(table, "get", id, opts, nil, out)
+}</span>
+
+// GetRecordsFor performs a servicenow getRecords to the specified table, with
+// options, and unmarshal's JSON into the output parameter.
+func (c Client) GetRecordsFor(table string, opts url.Values, out interface{}) error <span class="cov0" title="0">{
+        return c.PerformFor(table, "getRecords", "", opts, nil, out)
+}</span>
+
+// GetRecords performs a servicenow getRecords to the specified table, with
+// options, and returns a map for each item
+func (c Client) GetRecords(table string, opts url.Values) ([]map[string]interface{}, error) <span class="cov0" title="0">{
+        var out struct {
+                Records []map[string]interface{}
+        }
+        err := c.GetRecordsFor(table, opts, &amp;out)
+        return out.Records, err
+}</span>
+
+// Insert creates a new record for the specified table, with the specified obj
+// data, and takes a destination object out for the response data.
+func (c Client) Insert(table string, obj, out interface{}) error <span class="cov0" title="0">{
+        return c.PerformFor(table, "insert", "", nil, obj, out)
+}</span>
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package servicenow
+
+import (
+        "encoding/json"
+        "net/url"
+)
+
+// TableTasks defines the name of the table withing the JSONv2 web service to interface with
+// SNOW TASKs
+const TableTasks = "task"
+
+// GetTasksRequests method will take a url.Value type argument and call the GetRecordsFor method with
+// the task table and query as the arguments, then format the response into the TaskRequest type
+func (c Client) GetTasksRequests(query url.Values) ([]TaskRequest, error) <span class="cov0" title="0">{
+        var res struct {
+                Records []TaskRequest
+        }
+        err := c.GetRecordsFor(TableTasks, query, &amp;res)
+        return res.Records, err
+}</span>
+
+// CreateTask method will take a url.Value type argument and call the GetRecordsFor method with
+// the task table and query as the arguments, then format the response into the TaskRequest type
+func (c Client) CreateTask(query url.Values) ([]TaskRequest, error) <span class="cov0" title="0">{
+        var res struct {
+                Records []TaskRequest
+        }
+
+        var test interface{}
+        err := c.Insert(TableTasks, query, &amp;test)
+        return res.Records, err
+}</span>
+
+// TaskRequest is a struct type to define the formatted response received from the JSONv2
+// ServiceNow Web Service
+type TaskRequest struct {
+        Active                        bool        `json:"active,string"`
+        ActivityDue                   string      `json:"activity_due"`
+        AdditionalAssigneeList        string      `json:"additional_assignee_list"`
+        Approval                      string      `json:"approval"`
+        ApprovalHistory               string      `json:"approval_history"`
+        ApprovalSet                   string      `json:"approval_set"`
+        AssignedTo                    string      `json:"assigned_to"`
+        AssignmentGroup               string      `json:"assignment_group"`
+        BackoutPlan                   string      `json:"backout_plan"`
+        BusinessDuration              string      `json:"business_duration"`
+        BusinessService               string      `json:"business_service"`
+        CabDate                       SNTime      `json:"cab_date"`
+        CabDelegate                   string      `json:"cab_delegate"`
+        CabRecommendation             string      `json:"cab_recommendation"`
+        CabRequired                   bool        `json:"cab_required,string"`
+        CalendarDuration              string      `json:"calendar_duration"`
+        Category                      string      `json:"category"`
+        ChangePlan                    string      `json:"change_plan"`
+        ClosedAt                      SNTime      `json:"closed_at"`
+        ClosedBy                      string      `json:"closed_by"`
+        CloseNotes                    string      `json:"close_notes"`
+        CMDBCi                        string      `json:"cmdb_ci"`
+        Comments                      string      `json:"comments"`
+        CommentsAndWorkNotes          string      `json:"comments_and_work_notes"`
+        Company                       string      `json:"company"`
+        ConflictLastRun               string      `json:"conflict_last_run"`
+        ConflictStatus                string      `json:"conflict_status"`
+        ContactType                   string      `json:"contact_type"`
+        CorrelationDisplay            string      `json:"correlation_display"`
+        CorrelationID                 string      `json:"correlation_id"`
+        Description                   string      `json:"description"`
+        DueDate                       SNTime      `json:"due_date"`
+        EndDate                       SNTime      `json:"end_date"`
+        Escalation                    json.Number `json:"escalation"`
+        ExpectedStart                 SNTime      `json:"expected_start"`
+        FollowUp                      string      `json:"follow_up"`
+        GroupList                     string      `json:"group_list"`
+        ImplementationPlan            string      `json:"implementation_plan"`
+        Justification                 string      `json:"justification"`
+        Knowledge                     bool        `json:"knowledge,string"`
+        Location                      string      `json:"location"`
+        MadeSLA                       bool        `json:"made_sla,string"`
+        Number                        string      `json:"number"`
+        OpenedAt                      SNTime      `json:"opened_at"`
+        OpenedBy                      string      `json:"opened_by"`
+        Order                         string      `json:"order"`
+        OutsideMaintenanceSchedule    bool        `json:"outside_maintenance_schedule,string"`
+        Parent                        string      `json:"parent"`
+        Phase                         string      `json:"phase"`
+        PhaseState                    string      `json:"phase_state"`
+        Priority                      json.Number `json:"priority"`
+        ProductionSystem              bool        `json:"production_system,string"`
+        Reason                        string      `json:"reason"`
+        ReassignmentCount             json.Number `json:"reassignment_count"`
+        RequestedBy                   string      `json:"requested_by"`
+        RequestedByDate               SNTime      `json:"requested_by_date"`
+        ReviewComments                string      `json:"review_comments"`
+        ReviewDate                    SNTime      `json:"review_date"`
+        ReviewStatus                  string      `json:"review_status"`
+        Risk                          json.Number `json:"risk"`
+        Scope                         json.Number `json:"scope"`
+        ShortDescription              string      `json:"short_description"`
+        Skills                        string      `json:"skills"`
+        SLADue                        string      `json:"sla_due"`
+        StartDate                     SNTime      `json:"start_date"`
+        State                         string      `json:"state"`
+        Status                        string      `json:"__status"`
+        SysClassName                  string      `json:"sys_class_name"`
+        SysCreatedBy                  string      `json:"sys_created_by"`
+        SysCreatedOn                  SNTime      `json:"sys_created_on"`
+        SysDomain                     string      `json:"sys_domain"`
+        SysDomainPath                 string      `json:"sys_domain_path"`
+        SysID                         string      `json:"sys_id"`
+        SysModCount                   json.Number `json:"sys_mod_count"`
+        SysTags                       string      `json:"sys_tags"`
+        SysUpdatedBy                  string      `json:"sys_updated_by"`
+        SysUpdatedOn                  SNTime      `json:"sys_updated_on"`
+        TaskFor                       string      `json:"task_for"`
+        TestPlan                      string      `json:"test_plan"`
+        TimeWorked                    string      `json:"time_worked"`
+        Type                          string      `json:"type"`
+        UAccountManager               string      `json:"u_account_manager"`
+        UApproval                     string      `json:"u_approval"`
+        UApprovalHistory              string      `json:"u_approval_history"`
+        UBbrSalesRef                  string      `json:"u_bbr_sales_ref"`
+        UBillable                     string      `json:"u_billable"`
+        UBillableStartDate            string      `json:"u_billable_start_date"`
+        UCallerID                     string      `json:"u_caller_id"`
+        UCallNumber                   string      `json:"u_call_number"`
+        UChangeCategory               string      `json:"u_change_category"`
+        UChangeType                   string      `json:"u_change_type"`
+        UCiContacts                   string      `json:"u_ci_contacts"`
+        UCiNotAvailable               string      `json:"u_ci_not_available"`
+        UCiSelected                   string      `json:"u_ci_selected"`
+        UCiType                       string      `json:"u_ci_type"`
+        UCloseCode                    string      `json:"u_close_code"`
+        UCommercialApproval           string      `json:"u_commercial_approval"`
+        UCommercialRequirementsDetail string      `json:"u_commercial_requirements_detail"`
+        UCompleted                    string      `json:"u_completed"`
+        UCreatedFromCall              string      `json:"u_created_from_call"`
+        UCreateProject                string      `json:"u_create_project"`
+        UCustomerApprover             string      `json:"u_customer_approver"`
+        UCustomerInternal             string      `json:"u_customer_internal"`
+        UEscalationComments           string      `json:"u_escalation_comments"`
+        UFirstResponse                string      `json:"u_first_response"`
+        UFollowUpDate                 string      `json:"u_follow_up_date"`
+        UImpact                       string      `json:"u_impact"`
+        UImpactRpn                    string      `json:"u_impact_rpn"`
+        UIsClientVisible              string      `json:"u_is_client_visible"`
+        UITILWatchList                string      `json:"u_itil_watch_list"`
+        UJiraID                       string      `json:"u_jira_id"`
+        ULikelihood                   string      `json:"u_likelihood"`
+        ULoadApproverSelector         string      `json:"u_loadapproverselector"`
+        UMonthlyRecurringRevenue      string      `json:"u_monthly_recurring_revenue"`
+        UNonRecurringRevenue          string      `json:"u_non_recurring_revenue"`
+        UOnBehalfOf                   string      `json:"u_on_behalf_of"`
+        UOtherChangeTypeExplain       string      `json:"u_other_change_type_explain"`
+        UPcTemplate                   string      `json:"u_pc_template"`
+        UponApproval                  string      `json:"upon_approval"`
+        UponReject                    string      `json:"upon_reject"`
+        UPoNumber                     string      `json:"u_po_number"`
+        UPreAgreementJustification    string      `json:"u_pre_agreement_justification"`
+        UProvideDetailsCategory       string      `json:"u_provide_details_category"`
+        URedundancy                   string      `json:"u_redundancy"`
+        URefNumber                    string      `json:"u_refnumber"`
+        UResolvedTimeStamp            string      `json:"u_resolved_time_stamp"`
+        UReviewed                     string      `json:"u_reviewed"`
+        URft                          string      `json:"u_rft"`
+        URollback                     string      `json:"u_rollback"`
+        URpn                          string      `json:"u_rpn"`
+        UserInput                     string      `json:"user_input"`
+        UStateReason                  string      `json:"u_state_reason"`
+        UTaskEscalation               bool        `json:"u_task_escalation,string"`
+        UTaskEscalationComments       string      `json:"u_task_escalation_comments"`
+        UTemplate                     string      `json:"u_template"`
+        UUnassignedReasonExplain      string      `json:"u_unassigned_reason_explain"`
+        UWatchList                    string      `json:"u_watch_list"`
+        UZtmpAssigneeBlank            string      `json:"u_ztmpassigneeblank"`
+        WatchList                     string      `json:"watch_list"`
+        WorkEnd                       string      `json:"work_end"`
+        WorkNotes                     string      `json:"work_notes"`
+        WorkNotesList                 string      `json:"work_notes_list"`
+        WorkStart                     string      `json:"work_start"`
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package servicenow
+
+import (
+        "bytes"
+        "time"
+)
+
+type SNTime struct {
+        time.Time
+}
+
+const snFormat = "2006-01-02 15:04:05"
+
+func (s *SNTime) UnmarshalJSON(bs []byte) error <span class="cov8" title="1">{
+        st := string(bytes.Trim(bs, "\""))
+
+        if len(st) &lt; len(snFormat) </span><span class="cov0" title="0">{
+                return nil
+        }</span>
+
+        <span class="cov8" title="1">var err error
+        s.Time, err = time.Parse(snFormat, st)
+        return err</span>
+}
+
+func (s *SNTime) MarshalJSON() ([]byte, error) <span class="cov0" title="0">{
+        return []byte(s.Time.Format(snFormat)), nil
+}</span>
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package servicenow
+
+import "net/url"
+
+// GetUsers returns all users that match a query.
+func (c Client) GetUsers(query url.Values) ([]map[string]interface{}, error) <span class="cov0" title="0">{
+        var m struct{ Records []map[string]interface{} }
+        err := c.GetRecordsFor("sys_user", query, &amp;m)
+        return m.Records, err
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
