@@ -15,7 +15,7 @@
 # Variables to be used throughout the makefile. Most of these will be passed in as
 # ldflags when building/compiling the application.
 app_name := servicenow
-version := $(git describe --tags)
+version := $(shell git describe --tags)
 hash := $(shell git rev-parse HEAD)
 timestamp := $(shell date -u '+%Y-%m-%d_%I:%M:%S%p')
 
@@ -24,20 +24,19 @@ timestamp := $(shell date -u '+%Y-%m-%d_%I:%M:%S%p')
 # Default call to GNU make. Basically displays that the variables needed to run the
 # subsequent make functions are being pulled correctly
 all:
-	@echo $(app_name): v$(version)
+	@echo $(app_name): $(version)
 	@echo "\tgit hash: $(hash)"
 	@echo "\ttimestamp: $(timestamp)"
-	@echo "\nTop-level commands:\n\tmake lint\n\tmake build\n\tmake test"
 
 # Small function to run golint for the packages directories
 lint:
 	goimports -w -l *.go
 	gometalinter --config=.gometalinter.json ./...
 
-release: gorelease
+testrelease:
+	goreleaser --rm-dist --snapshot
 
-gorelease:
-	git tag $(version)
+release:
 	goreleaser --rm-dist
 
 # Test related actions
