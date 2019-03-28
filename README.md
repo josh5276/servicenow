@@ -22,7 +22,7 @@ See the [GoDoc](https://godoc.org/github.com/josh5276/servicenow) pages for deta
 ## Contributing
 
 If you are interested in contributing to this project and need assistance, feel free to review the
-[CONTRIBUTING.md](https://github.com/josh5276/servicenow/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/josh5276/servicenow/blob/master/CONTRIBUTING.md)
 document for details on the project hierarchy and instructions on preparing a PR as well as 
 performing releases. 
 
