@@ -7,27 +7,35 @@ import (
 
 // TableTasks defines the name of the table withing the JSONv2 web service to interface with
 // SNOW TASKs
-const TableTasks = "task"
+const TableTasks = "sc_task"
 
 // GetTasksRequests method will take a url.Value type argument and call the GetRecordsFor method with
 // the task table and query as the arguments, then format the response into the TaskRequest type
 func (c Client) GetTasksRequests(query url.Values) ([]TaskRequest, error) {
 	var res struct {
-		Records []TaskRequest
+		Records []TaskRequest `json:"records"`
 	}
 	err := c.GetRecordsFor(TableTasks, query, &res)
 	return res.Records, err
 }
 
-// CreateTask method will take a url.Value type argument and call the GetRecordsFor method with
+// CreateTask method will take a TaskRequest type argument and call the Insert method with
+// the task table and task obj as the arguments, then format the response into the TaskRequest type
+func (c Client) CreateTask(task TaskRequest) ([]TaskRequest, error) {
+	var res struct {
+		Records []TaskRequest `json:"records"`
+	}
+	err := c.Insert(TableTasks, task, &res)
+	return res.Records, err
+}
+
+// UpdateTask method will take a url.Value type argument and call the GetRecordsFor method with
 // the task table and query as the arguments, then format the response into the TaskRequest type
-func (c Client) CreateTask(query url.Values) ([]TaskRequest, error) {
+func (c Client) UpdateTask(query url.Values, update map[string]interface{}) ([]TaskRequest, error) {
 	var res struct {
 		Records []TaskRequest
 	}
-
-	var test interface{}
-	err := c.Insert(TableTasks, query, &test)
+	err := c.Update(TableTasks, query, update, &res)
 	return res.Records, err
 }
 
