@@ -4,7 +4,9 @@ import "net/url"
 
 // GetUsers returns all users that match a query.
 func (c Client) GetUsers(query url.Values) ([]User, error) {
-	var m struct{ Records []User }
+	var m struct {
+		Records []User `json:"records"`
+	}
 	err := c.GetRecordsFor("sys_user", query, &m)
 	return m.Records, err
 }
