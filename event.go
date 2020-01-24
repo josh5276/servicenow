@@ -22,16 +22,10 @@ func (c Client) GetEvents(query url.Values) ([]Event, error) {
 // Event is a struct type to define the formatted response received from the JSONv2
 // ServiceNow Web Service
 type Event struct {
-	UReportedByGroupNew struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_reported_by_group_new"`
-	USnowChangeRequestNumber string `json:"u_snow_change_request_number__"`
-	UIncidentOverview        string `json:"u_incident_overview"`
-	URcaOwnerNew             struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_rca_owner_new"`
+	UReportedByGroupNew       string      `json:"u_reported_by_group_new"`
+	USnowChangeRequestNumber  string      `json:"u_snow_change_request_number__"`
+	UIncidentOverview         string      `json:"u_incident_overview"`
+	URcaOwnerNew              string      `json:"u_rca_owner_new"`
 	SysUpdatedOn              SNTime      `json:"sys_updated_on"`
 	UOpenDuration             SNTime      `json:"u_open_duration"`
 	UReportedBy               string      `json:"u_reported_by"`
@@ -86,67 +80,52 @@ type Event struct {
 	UImNotificationDuration   SNTime      `json:"u_im_notification_duration"`
 	UEventLeader              string      `json:"u_event_leader"`
 	URootCauseCode            string      `json:"u_root_cause_code"`
-	URootCauseSystem          struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_root_cause_system"`
-	UCirMetric                bool   `json:"u_cir_metric,string"`
-	UCustomerApprovedComments string `json:"u_customer_approved_comments"`
-	UWorknotes                string `json:"u_worknotes"`
-	SysUpdatedBy              string `json:"sys_updated_by"`
-	UIncidentNumber           string `json:"u_incident_number"`
-	SysCreatedOn              SNTime `json:"sys_created_on"`
-	UImpactDuration           SNTime `json:"u_impact_duration"`
-	UActive                   bool   `json:"u_active,string"`
-	UIncidentSummary          string `json:"u_incident_summary"`
-	UOpenedBy                 struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_opened_by"`
-	UAdditionalInformation  string      `json:"u_additional_information"`
-	UInitialEmailRecipients string      `json:"u_initial_email_recipients"`
-	ULessonsLearned         string      `json:"u_lessons_learned"`
-	UOtherKeyCommentary     string      `json:"u_other_key_commentary"`
-	UIncidentStatus         json.Number `json:"u_incident_status"`
-	UDl                     string      `json:"u_dl"`
-	UChangeControl          string      `json:"u_change_control"`
-	UNewSubscribers         string      `json:"u_new_subscribers"`
-	UEventImpact            string      `json:"u_event_impact"`
-	UPrivate                string      `json:"u_private"`
-	UIncidentDuration       SNTime      `json:"u_incident_duration"`
-	URootCauseChangeRelated bool        `json:"u_root_cause_change_related_,string"`
-	UProblem                string      `json:"u_problem"`
-	URcaOwner               struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_rca_owner"`
-	USubscribers    string `json:"u_subscribers"`
-	UIncidentOrigin string `json:"u_incident_origin"`
-	UClosedBy       struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_closed_by"`
-	SysID                  string      `json:"sys_id"`
-	UCreateEtherpadPage    string      `json:"u_create_etherpad_page"`
-	URootCauseCodeNew      string      `json:"u_root_cause_code_new"`
-	UOs                    string      `json:"u_os"`
-	UIncidentEnd           SNTime      `json:"u_incident_end"`
-	UReasonForOther        string      `json:"u_reason_for_other"`
-	UChangeControlNumber   string      `json:"u_change_control_number"`
-	UIncidentTitle         string      `json:"u_incident_title"`
-	UPoc                   string      `json:"u_poc"`
-	SysModCount            json.Number `json:"sys_mod_count"`
-	UImpact                string      `json:"u_impact"`
-	SysTags                string      `json:"sys_tags"`
-	UIncidentSeverityLevel string      `json:"u_incident_severity_level"`
-	UNextAction            string      `json:"u_next_action"`
-	UTeamsEngaged          string      `json:"u_teams_engaged"`
-	UIncidentStart         SNTime      `json:"u_incident_start"`
-	UIncidentAlert         bool        `json:"u_incident_alert,string"`
-	UOrganization          string      `json:"u_organization"`
-	UTeamsEngagedBcc       string      `json:"u_teams_engaged_bcc"`
-	URootCauseOrganization struct {
-		Link  string `json:"link"`
-		Value string `json:"value"`
-	} `json:"u_root_cause_organization"`
+	URootCauseSystem          string      `json:"u_root_cause_system"`
+	UCirMetric                bool        `json:"u_cir_metric,string"`
+	UCustomerApprovedComments string      `json:"u_customer_approved_comments"`
+	UWorknotes                string      `json:"u_worknotes"`
+	SysUpdatedBy              string      `json:"sys_updated_by"`
+	UIncidentNumber           string      `json:"u_incident_number"`
+	SysCreatedOn              SNTime      `json:"sys_created_on"`
+	UImpactDuration           SNTime      `json:"u_impact_duration"`
+	UActive                   bool        `json:"u_active,string"`
+	UIncidentSummary          string      `json:"u_incident_summary"`
+	UOpenedBy                 string      `json:"u_opened_by"`
+	UAdditionalInformation    string      `json:"u_additional_information"`
+	UInitialEmailRecipients   string      `json:"u_initial_email_recipients"`
+	ULessonsLearned           string      `json:"u_lessons_learned"`
+	UOtherKeyCommentary       string      `json:"u_other_key_commentary"`
+	UIncidentStatus           json.Number `json:"u_incident_status"`
+	UDl                       string      `json:"u_dl"`
+	UChangeControl            string      `json:"u_change_control"`
+	UNewSubscribers           string      `json:"u_new_subscribers"`
+	UEventImpact              string      `json:"u_event_impact"`
+	UPrivate                  string      `json:"u_private"`
+	UIncidentDuration         SNTime      `json:"u_incident_duration"`
+	URootCauseChangeRelated   bool        `json:"u_root_cause_change_related_,string"`
+	UProblem                  string      `json:"u_problem"`
+	URcaOwner                 string      `json:"u_rca_owner"`
+	USubscribers              string      `json:"u_subscribers"`
+	UIncidentOrigin           string      `json:"u_incident_origin"`
+	UClosedBy                 string      `json:"u_closed_by"`
+	SysID                     string      `json:"sys_id"`
+	UCreateEtherpadPage       string      `json:"u_create_etherpad_page"`
+	URootCauseCodeNew         string      `json:"u_root_cause_code_new"`
+	UOs                       string      `json:"u_os"`
+	UIncidentEnd              SNTime      `json:"u_incident_end"`
+	UReasonForOther           string      `json:"u_reason_for_other"`
+	UChangeControlNumber      string      `json:"u_change_control_number"`
+	UIncidentTitle            string      `json:"u_incident_title"`
+	UPoc                      string      `json:"u_poc"`
+	SysModCount               json.Number `json:"sys_mod_count"`
+	UImpact                   string      `json:"u_impact"`
+	SysTags                   string      `json:"sys_tags"`
+	UIncidentSeverityLevel    string      `json:"u_incident_severity_level"`
+	UNextAction               string      `json:"u_next_action"`
+	UTeamsEngaged             string      `json:"u_teams_engaged"`
+	UIncidentStart            SNTime      `json:"u_incident_start"`
+	UIncidentAlert            bool        `json:"u_incident_alert,string"`
+	UOrganization             string      `json:"u_organization"`
+	UTeamsEngagedBcc          string      `json:"u_teams_engaged_bcc"`
+	URootCauseOrganization    string      `json:"u_root_cause_organization"`
 }

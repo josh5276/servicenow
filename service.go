@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strings"
 )
 
 var httpRE = regexp.MustCompile("^https?://")
@@ -45,20 +46,26 @@ func (c *Client) PerformFor(table, action, id string, opts url.Values, body inte
 		inst = "https://" + inst
 	}
 
-	u := fmt.Sprintf("%s/%s.do", inst, table)
-
-	vals := url.Values{
-		"JSONv2":      {""},
-		sys("action"): {action},
+	// This is a weird hack because the double encoding of url.Values onto the existing
+	// url.Values causes issues with complex query values. For example:
+	//  - sys_created_on>=javascript:gs.dateGenerate('2019-06-01','00:00:00')
+	if opts != nil {
+		values := make([]string, 0)
+		for k, v := range opts {
+			values = append(values, fmt.Sprintf("%s=%s", k, strings.Join(v, ",")))
+			opts.Del(k)
+		}
+		opts.Add(sys("query"), strings.Join(values, "^"))
+	} else {
+		opts = url.Values{}
 	}
+
+	opts.Set("JSONv2", "")
+	opts.Set("action", action)
 
 	if id != "" {
-		vals.Set(sys("sys_id"), id)
-		vals.Set("displayvalue", "true")
-	}
-
-	if opts != nil {
-		vals.Set(sys("query"), opts.Encode())
+		opts.Set(sys("sys_id"), id)
+		opts.Set("displayvalue", "true")
 	}
 
 	meth := http.MethodGet
@@ -71,7 +78,7 @@ func (c *Client) PerformFor(table, action, id string, opts url.Values, body inte
 		}
 	}
 
-	req, err := http.NewRequest(meth, u+"?"+vals.Encode(), buf)
+	req, err := http.NewRequest(meth, fmt.Sprintf("%s/%s.do?%s", inst, table, opts.Encode()), buf)
 	if err != nil {
 		return err
 	}
@@ -83,19 +90,23 @@ func (c *Client) PerformFor(table, action, id string, opts url.Values, body inte
 	req.SetBasicAuth(c.Username, c.Password)
 
 	res, err := http.DefaultClient.Do(req)
+	if res != nil {
+		defer func() {
+			if defErr := res.Body.Close(); defErr != nil {
+				err = fmt.Errorf("%s::%s", err, defErr)
+			}
+		}()
+	}
 	if err != nil {
 		return err
 	}
-
-	defer res.Body.Close()
 
 	buf.Reset()
 
 	// Store JSON so we can do a preliminary error check
 	var echeck Err
 
-	err = json.NewDecoder(io.TeeReader(res.Body, buf)).Decode(&echeck)
-	if err == nil && echeck.Err != "" {
+	if err = json.NewDecoder(io.TeeReader(res.Body, buf)).Decode(&echeck); err == nil && echeck.Err != "" {
 		return echeck
 	}
 
